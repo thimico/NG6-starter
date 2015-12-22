@@ -7,6 +7,5 @@ export default {
 	controller,
 	restrict: 'E',
 	controllerAs: 'vm',
-	scope: {},
-	bindToController: true
+	bindings: {}
 };
