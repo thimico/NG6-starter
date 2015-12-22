@@ -1,19 +1,24 @@
 import angular from 'angular';
 import 'angular-ui-router';
+import 'angular-resource';
 import homeComponent from './home.component';
+import Service from '../../common/service/service';
 
-let homeModule = angular.module('home', [
-	'ui.router'
-])
-.config(($stateProvider, $urlRouterProvider)=>{
-	$urlRouterProvider.otherwise('/');
+export default angular
+	.module('home', [
+		'ui.router',
+		'ngResource',
+		Service
+	])
 	
-	$stateProvider
-		.state('home', {
-			url: '/',
-			template: '<home></home>'
-		});
-})
-.directive('home', homeComponent);
-
-export default homeModule;
+	.config(($stateProvider, $urlRouterProvider)=>{
+		$urlRouterProvider.otherwise('/');
+		
+		$stateProvider
+			.state('home', {
+				url: '/',
+				template: '<home></home>'
+			});
+	})
+	.component('home', homeComponent)
+	.name;

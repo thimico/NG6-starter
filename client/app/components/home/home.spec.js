@@ -46,7 +46,7 @@ describe('Home', ()=>{
 	
 	describe('Component', ()=>{
 			// test the component/directive itself
-			let component = HomeComponent();
+			let component = HomeComponent;
 			
 			it('should use the right template',()=>{
 				expect(component.template).to.equal(HomeTemplate);

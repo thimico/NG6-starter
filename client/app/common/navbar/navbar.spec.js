@@ -46,7 +46,7 @@ describe('Navbar', ()=>{
 	
 	describe('Component', ()=>{
 			// test the component/directive itself
-			let component = NavbarComponent();
+			let component = NavbarComponent;
 			
 			it('should use the right template',()=>{
 				expect(component.template).to.equal(NavbarTemplate);

@@ -3,14 +3,16 @@ import 'angular-ui-router';
 import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
+import angularComponent from 'angular-component';
 import 'normalize.css';
 
-let appModule = angular.module('app', [
-	'ui.router',
-	Common.name,
-	Components.name
-])
-.directive('app', AppComponent);
+let appModule = angular
+	.module('app', [
+		'ui.router',
+		Common,
+		Components
+	])
+	.component('app', AppComponent);
 
 /*
  * As we are using ES6 with Angular 1.x we can't use ng-app directive

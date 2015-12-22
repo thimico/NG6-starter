@@ -48,7 +48,7 @@ describe('<%= upCaseName %>', ()=>{
 	
 	describe('Component', ()=>{
 			// test the component/directive itself
-			let component = <%= upCaseName %>Component();
+			let component = <%= upCaseName %>Component;
 			
 			it('should use the right template',()=>{
 				expect(component.template).to.equal(<%= upCaseName %>Template);
