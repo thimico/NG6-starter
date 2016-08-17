@@ -1,8 +1,117 @@
-<nav class="navbar">
-  <div class="logo">
-    <h1><a ui-sref="home">{{ $ctrl.name }}</a></h1>
-  </div>
-  <div class="nav-links">
-    <span><a ui-sref="about">about</a></span>
-  </div>
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-class="{'display-none': (!vm.isAuthed())}" ng-if="!vm.hideNavbar">
+	<div class="container-fluid">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" ui-sref="home">STCasp Web</a>
+		</div>
+
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+
+        <!-- Tabelas gerais -->
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">
+          <span class="fa fa-blind"></span>Tabelas gerais<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li class="hz">
+              <a ui-sref="bancos">Bancos</a>
+              <a ng-click="vm.newPage('bancos')"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
+            </li>
+            <li><a ui-sref="itens">Ítens</a></li>
+            <li><a ui-sref="historicos">Históricos</a></li>
+            <li><a ui-sref="contratoTipos">Tipos de contrato</a></li>
+            <li><a ui-sref="tiposCertidaoTc">Tipos de certidão TC</a></li>
+            <li><a ui-sref="tiposCertidao">Tipos de certidão</a></li>
+            <li><a ui-sref="tiposMoeda">Tipos de moeda</a></li>
+            <li><a ui-sref="modalidades">Modalidades</a></li>
+          </ul>
+        </li>
+
+        <!-- Cadastros Básicos -->
+
+		<li class="dropdown">
+	    	<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">
+		    	<span class="glyphicon glyphicon-th"></span>Cadastros básicos<span class="caret"></span>
+	        </a>
+    			<ul class="dropdown-menu">
+            <li><a ui-sref="entidades"><span class="glyphicon glyphicon-cog"></span> Entidades</a></li>
+            <li><a ui-sref="usuarios"><span class="glyphicon glyphicon-user"></span> Usuários</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ui-sref="pessoas">Pessoas</a></li>
+            <li><a ui-sref="fornecedores">Fornecedores</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ui-sref="contratos">Contratos</a></li>
+				    <li><a ui-sref="orgaos">Orgãos</a></li>
+      			<li><a ui-sref="funcoes">Funções</a></li>
+            <li><a ui-sref="subfuncoes">Subfunções</a></li>
+      			<li><a ui-sref="unidadesOrcamentarias">Unidades orçamentárias</a></li>
+      			<li><a ui-sref="objetivos">Objetivos</a></li>
+     				<li><a ui-sref="programas">Programas</a></li>
+            <li><a ui-sref="fontes">Fontes</a></li>
+            <li><a ui-sref="acoes">Ações</a></li>
+            <li><a ui-sref="elementosDespesa">Classificação da Despesa</a></li>
+            <li><a ui-sref="subelementos">Subelementos</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a ui-sref="elementosReceita">Classificação das Receitas</a></li>
+    			</ul>
+        </li>
+
+        <!-- Orçamento -->
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">
+          <span class="glyphicon glyphicon-tasks"></span>Orçamento<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="loas">Lei Orçamentária Anual (LOA)</a></li>
+            <li><a ui-sref="dotacoes">Dotações Orçamentárias</a></li>
+            <li><a ui-sref="previsoesReceita">Previsões de Receitas</a></li>
+          </ul>
+        </li>
+
+        <!-- Relatórios -->
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+             aria-expanded="false">
+          <span class="glyphicon glyphicon-print"></span>Relatórios<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="qdd">QDD - Quadro de Detalhamento da Despesa</a></li>
+            <li><a ui-sref="anexo1">Anexo I - Demonstrativo da Receita e Despesa Segundo as Categorias Econônicas</a></li>
+            <li><a ui-sref="anexo2">Anexo II - Demonstrativo da Receita Segundo sua Natureza e Fonte de Recursos</a></li>
+            <li><a ui-sref="anexo8">Anexo VIII - Demonstrativo da Despesa por Órgãos e Funções</a></li>
+      			<li><a ui-sref="resumoFonteRecurso">Resumo por Fonte de Recurso</a></li>
+            <li><a ui-sref="resumoFonteRecurso2">Resumo por Fonte de Recurso (Modelo 2)</a></li>
+            <li><a ui-sref="resumoProjetoAtividade">Resumo por Projeto/Atividade</a></li>
+            <li><a ui-sref="fontePorSecretaria">Fonte por Secretaria</a></li>
+            <li><a ui-sref="despesaPorOrgao">Anexo IX - Despesa por Órgão (LDO)</a></li>
+            <li><a ui-sref="despesaPorUnidade">Relação de Despesa por Unidade</a></li>
+            <li><a ui-sref="despesaPorFuncao">Relação de Despesa por Função</a></li>
+            <li><a ui-sref="despesaPorPrograma">Relação de Despesa por Programa</a></li>
+            <li><a ui-sref="despesaPorFuncaoAnexo11">Anexo XI - Despesa por Função</a></li>
+            <li><a ui-sref="despesaPorSubfuncaoAnexo12">Anexo XII - Despesa por Subfunção</a></li>
+            <li><a ui-sref="detalhamentoDespesaPorUnidade">Detalhamento de Despesa Por Unidade</a></li>
+          </ul>
+        </li>
+		</ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a ng-click="vm.logout()" href="">
+             <span class="glyphicon glyphicon-off" ></span>Sair
+          </a>
+        </li>
+      </ul>
+
+		</div>
+	</div>
 </nav>
+

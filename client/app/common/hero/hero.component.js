@@ -5,6 +5,7 @@ import './hero.styl';
 let heroComponent = {
   restrict: 'E',
   bindings: {},
+  controllerAs: 'vm',
   template,
   controller
 };

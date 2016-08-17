@@ -16,6 +16,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import colorsSupported      from 'supports-color';
 import historyApiFallback   from 'connect-history-api-fallback';
+import Dashboard            from 'webpack-dashboard';
+import DashboardPlugin      from 'webpack-dashboard/plugin';
 
 let root = 'client';
 
@@ -75,6 +77,8 @@ gulp.task('serve', () => {
   ].concat(paths.entry);
 
   var compiler = webpack(config);
+  var dashboard = new Dashboard();
+  compiler.apply(new DashboardPlugin(dashboard.setData));
 
   serve({
     port: process.env.PORT || 3000,
@@ -83,6 +87,7 @@ gulp.task('serve', () => {
     middleware: [
       historyApiFallback(),
       webpackDevMiddleware(compiler, {
+        quiet: true,
         stats: {
           colors: colorsSupported,
           chunks: false,
@@ -90,7 +95,9 @@ gulp.task('serve', () => {
         },
         publicPath: config.output.publicPath
       }),
-      webpackHotMiddleware(compiler)
+      webpackHotMiddleware(compiler, {
+        log: () => {}
+      })
     ]
   });
 });
