@@ -6,14 +6,29 @@
 
 .navbar
   font-size medium
-  margin-bottom 0px !important
+  margin-bottom 0px
   .dropdown-menu
     font-size large
-    margin-right 0px !important
+    margin-right 0px
   .glyphicon
     margin-right 5px
 
 .navbar-inverse
   background-color #333333
   border-color #333333
-  position relative !important
+  position relative
+
+.nav
+  li
+    a
+      display inline-block
+    &.hz
+      width 100%
+      display inline-flex
+      a
+        &:first-child
+          width 100%
+        &:nth-child(2)
+          padding-right 3px
+          padding-left 7px
+          cursor pointer

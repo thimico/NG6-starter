@@ -12,8 +12,8 @@ module.exports = {
       { test: /\.styl$/, loader: 'style!css!stylus' },
       { test: /\.css$/, loader: 'style!css' },
       { test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, loader: 'imports?jQuery=jquery' },
-      { test: /\.(woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000' },
-      { test: /\.(ttf|eot)(\?[\s\S]+)?$/, loader: 'file' },
+      { test: /\.(woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&name=./fonts/[hash].[ext]' },
+      { test: /\.(ttf|eot)(\?[\s\S]+)?$/, loader: 'file?name=./fonts/[hash].[ext]' },
     ]
   },
   plugins: [
