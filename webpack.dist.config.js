@@ -8,6 +8,13 @@ config.output = {
   path: path.resolve(__dirname, 'dist')
 };
 
+config.resolve = {
+  extensions: ['', '.js'],
+  alias: {
+    spin: 'spin.js'
+  }
+};
+
 config.plugins = config.plugins.concat([
 
   // Reduces bundles total size

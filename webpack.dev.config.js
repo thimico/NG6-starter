@@ -8,6 +8,13 @@ config.output = {
   path: path.resolve(__dirname, 'client')
 };
 
+config.resolve = {
+  extensions: ['', '.js'],
+  alias: {
+    spin: 'spin.js'
+  }
+};
+
 config.plugins = config.plugins.concat([
 
   // Adds webpack HMR support. It act's like livereload,
