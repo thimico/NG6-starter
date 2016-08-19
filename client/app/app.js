@@ -9,6 +9,7 @@ import 'awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css';
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import Common from './common/common';
+import Service from './service/service';
 import Components from './components/components';
 import AppComponent from './app.component';
 import 'angular-i18n/pt-br';
@@ -31,6 +32,7 @@ import 'lodash';
 angular.module('app', [
     uiRouter,
     Common,
+    Service,
     Components,
     'ngAnimate',
     'ngSanitize',

@@ -1,14 +1,15 @@
 class HeroController {
   /*@ngInject*/
 
-  constructor(toastr, $http, cfpLoadingBar, usSpinnerService) {
+  constructor(toastr, $http, cfpLoadingBar, usSpinnerService, bancoService) {
     this.name = 'hero';
     this.usSpinnerService = usSpinnerService;
     this.$http = $http;
     this.toastr = toastr;
     this.cfpLoadingBar = cfpLoadingBar;
     this.value = 0.45;
-    this.lista = [{id:1, teste:'teste1'},{id:2, teste:'teste2'}, {id:3, teste:'teste3'}, {id:4, teste:'teste4'}];
+    this.bancoService = bancoService;
+    this.lista = bancoService.obterTodos().$object;
   }
 
   startSpin(){
@@ -17,6 +18,10 @@ class HeroController {
 
   stopSpin(){
     this.usSpinnerService.stop('spinner-1');
+  }
+
+  filtro() {
+    this.lista = this.bancoService.obterTodos({nome: 'a'}).$object;
   }
 
   teste2() {
@@ -50,12 +55,11 @@ class HeroController {
     this.cfpLoadingBar.start();
   }
 
-  teste() {
+  teste1() {
     let x = {teste:'teste'};
     let y = {teste2:'teste2'};
     _.merge(x,y);
     console.log(x);
-
   }
 }
 
