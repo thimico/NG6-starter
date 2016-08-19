@@ -15,15 +15,6 @@ let component = {
 let module = angular.module('navbar', [
   'ui.router'
 ])
-.config(($stateProvider, $urlRouterProvider)=>{
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-    .state('bancos', {
-      url: '/bancos?hideNavbar',
-      template: '<bancos hide-navbar="vm.setHideNavbar(hideNavbar)"></bancos>'
-    });
-})
 .component('navbar', component)
 .name;
 

@@ -18,17 +18,14 @@
   border-color #333333
   position relative
 
-.nav
-  li
-    a
-      display inline-block
-    &.hz
+.navbar-multiple
+  width 100%
+  display inline-flex
+  a
+    display inline-block
+    &:first-child
       width 100%
-      display inline-flex
-      a
-        &:first-child
-          width 100%
-        &:nth-child(2)
-          padding-right 3px
-          padding-left 7px
-          cursor pointer
+    &:nth-child(2)
+      padding-right 3px
+      padding-left 7px
+      cursor pointer

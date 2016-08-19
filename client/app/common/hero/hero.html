@@ -1,8 +1,11 @@
 <section class="hero">
   <h1>This is the NG6 starter</h1>
   <h3>You can find me inside {{ vm.name }}.html</h3>
+  {{vm.value | percentage}}
+  {{'30480530' | brCep}}
+  {{'30480530' | currency}}
 </section>
-<input type="text" name="field" ng-model="number" ui-number-mask="3">
+<input type="text" ui-mask="99.99" name="field" ng-model="number">
 
 <button class="btn btn-success btn-block " ng-click="vm.teste()">
   <span class="glyphicon glyphicon-plus-sign"> </span> Novo
