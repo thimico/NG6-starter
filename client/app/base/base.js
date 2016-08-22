@@ -1,7 +1,8 @@
 import angular from 'angular';
-import service from './service';
+import apiFactory from './api.factory';
 
 let baseModule = angular.module('app.base', [])
+.factory('apiFactory', apiFactory)
 .name;
 
 export default baseModule;

@@ -1,4 +1,4 @@
 {
-  "plugins": ["transform-runtime"],
+  "plugins": ["transform-class-properties", "syntax-decorators", "ng-annotate", "transform-runtime"],
   "presets": ["es2015", "stage-0"]
 }

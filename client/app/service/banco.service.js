@@ -1,9 +1,9 @@
-import BaseService from './base.service';
+import BaseService from '../base/base.service'
 
 class bancoService extends BaseService {
   /*@ngInject*/
-  constructor(Restangular) {
-    super(Restangular, 'bancos');
+  constructor(apiFactory) {
+    super(apiFactory, {resource: 'bancos'});
   }
 
 }

@@ -15,6 +15,7 @@ import AppComponent from './app.component';
 import 'angular-i18n/pt-br';
 import 'angular-animate';
 import 'angular-sanitize';
+import 'angular-messages';
 import 'angular-toastr';
 import 'angular-ui-bootstrap';
 import 'angular-ui-mask';
@@ -47,6 +48,7 @@ angular.module('app', [
     'cfp.loadingBar',
     'smart-table',
     'toastr',
+    'ngMessages',
   ])
   .config(($locationProvider) => {
     "ngInject";
