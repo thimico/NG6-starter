@@ -1,13 +1,100 @@
 .app
   height 100%
-  background-color $lightBgColor
-
+  margin-right auto
+  margin-left auto
+  font-family Cabin-Regular
 
 .required-label
   &:after
     content "*"
     color red
 
+.ellipsis-on-overflow
+  max-width 0
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
 section
   margin-left: 5%
   margin-right: 5%
+
+.center-align
+  text-align center
+
+.lg-filter-buttons
+  margin-top 20px
+
+.container-fluid
+  & > .table
+    margin-top 30px
+
+@media (min-width: 992px)
+  #filtros
+      display block
+  .btn-filtrar
+    display none
+
+@media (max-width: 992px)
+  .row
+    & > .container-fluid
+      margin-top 5px
+  .btn-filtrar
+    display block
+    margin-top 5px
+  #nfiltros
+    display none
+  .lg-filter-buttons
+    & > div
+      margin-top 5px
+
+@media screen and (max-width: 680px)
+  overflow-x hidden
+  overflow-y auto
+  .sm-display-none
+    display none !important
+
+.st-sort-ascent
+  &:before
+    content '\25B2'
+    margin-right 7px
+
+.st-sort-descent
+  &:before
+    content '\25BC'
+    margin-right 7px
+
+.st-sort-both
+  &:before
+    content '\25B2 \25BC'
+    margin-right 7px
+
+.st-sort-both, .st-sort-descent, .st-sort-ascent
+  cursor pointer
+
+.input-group
+  & > .ui-select-container
+    & > .ui-select-match
+      & > span
+        max-width 92%
+        position absolute
+    & + span
+      & > button
+        top -1px
+
+/*
+.bg-image { ;;;;;; HOME SCREEN
+  width: 100%;
+  height: auto;
+}
+
+.modal-header {
+  background-color: #5b80aa;
+  color: #ffffff;
+  text-shadow: 2px 2px 2px black;
+}
+
+.modal-body .container {
+  width: inherit !important;
+}
+*/

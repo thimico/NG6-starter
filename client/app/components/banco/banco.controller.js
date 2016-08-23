@@ -8,12 +8,7 @@ class BancoController extends BaseController {
     this.title = 'Bancos';
     this.entityName = 'Banco';
     this.formComponent = 'bancoEditModal';
-    this.paginated = false;
-    this.search();
-  }
-
-  teste() {
-    this.messageFactory.addSuccess('Registro cadastrado com sucesso!', true);
+    this.paginated = true;
   }
 }
 

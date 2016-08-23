@@ -2,29 +2,25 @@
 
 <page-title title="vm.title"></page-title>
 <section>
-  <div class="container-fluid container-filtros">
-    <div id="filtros">
+  <div class="container-fluid">
+    <div class="collapse" id="filtros">
       <div class="row">
         <div class="container-fluid col-md-3">
           <label for="nome">Código</label>
-          <div class="">
-            <input type="text" id="codigo" name="codigo" placeholder="Código"
-              autofocus maxlength="3" ng-maxlength="3"
-              class="form-control input-sm" ng-model="vm.filter.codigo">
-          </div>
+          <input type="text" id="codigo" name="codigo" placeholder="Código"
+            autofocus maxlength="3" ng-maxlength="3"
+            class="form-control input-sm" ng-model="vm.filter.codigo">
         </div>
         <div class="container-fluid col-md-5">
           <label for="nome">Nome</label>
-          <div class="">
-            <input type="text" id="nome" name="nome" placeholder="Nome do banco"
-              class="form-control input-sm" ng-model="vm.filter.nome">
-          </div>
+          <input type="text" id="nome" name="nome" placeholder="Nome do banco"
+            class="form-control input-sm" ng-model="vm.filter.nome">
         </div>
       </div>
 
-      <div class="row" style="margin-top:40px">
+      <div class="row lg-filter-buttons">
         <div class="col-md-2" id="nfiltros">
-          <button class="btn btn-success btn-block " ng-click="vm.save()">
+          <button class="btn btn-success btn-block " ng-click="vm.new()">
             <span class="glyphicon glyphicon-plus-sign"> </span> Novo
           </button>
         </div>
@@ -42,26 +38,42 @@
         </div>
       </div>
     </div>
+
+    <div class="container-fluid">
+      <div class="row btn-filtrar">
+        <button class="btn btn-primary btn-block" data-toggle="collapse" data-target="#filtros">
+          <span class="glyphicon glyphicon-filter"> Filtrar</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row btn-filtrar">
+        <button class="btn btn-success btn-block " ng-click="vm.new()">
+          <span class="glyphicon glyphicon-plus-sign"> </span> Novo
+        </button>
+      </div>
+    </div>
   </div>
   <div class="container-fluid">
     <table st-table="vm.page.content" st-pipe="vm.onPipe" class="table table-striped table-condensed">
       <thead>
         <tr>
-          <th class="col-md-1" st-sort="codigo">Codigo</th>
-          <th class="col-md-2" st-sort-default="true" st-sort="nome">Nome</th>
-          <th class="col-md-1">Ação</th>
+          <th class="col-xs-1 col-sm-1" st-sort="codigo">Codigo</th>
+          <th class="col-xs-7 col-sm-9" st-sort-default="true" st-sort="nome">Nome</th>
+          <th class="col-xs-4 col-sm-2 text-center">Ação</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td colspan="5" ng-if="!vm.page.content.length">
+          <td colspan="3" ng-if="!vm.page.content.length">
             <p>Nenhum registro cadastrado.</p>
           </td>
         </tr>
         <tr ng-repeat="item in vm.page.content" ng-if="vm.page.content.length">
-          <td class="col-md-1">{{item.codigo}}</td>
-          <td class="col-md-2">{{item.nome}}</td>
-          <td class="col-md-1">
+          <td>{{item.codigo}}</td>
+          <td>{{item.nome}}</td>
+          <td class="text-center">
             <div class="action-buttons">
               <button class="btn btn-warning btn-sm glyphicon glyphicon-pencil" ng-click="vm.edit(item.id)"
                 uib-tooltip="Editar">
@@ -71,20 +83,19 @@
               </button>
             </div>
           </td>
-
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="1" class="text-center">
+          <td class="col-md-1 text-center">
             <div>
               <label for="paginas_slct">Itens por página</label>
-              <select id="paginas_slct" class="form-control " type="number" ng-model="vm.itensPorPagina" ng-options="item for item in [1,5,10,20,50,100] ">
+              <select id="paginas_slct" class="form-control " type="number" ng-model="vm.itemsPerPage" ng-options="item for item in [1,5,10,20,50,100] ">
               </select>
             </div>
           </td>
-          <td colspan="5" class="text-center">
-            <div st-pagination="" st-items-by-page="vm.itensPorPagina"></div>
+          <td colspan="2" class="col-md-11 text-center">
+            <div st-pagination="" st-items-by-page="vm.itemsPerPage"></div>
           </td>
         </tr>
       </tfoot>

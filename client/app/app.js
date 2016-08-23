@@ -12,6 +12,7 @@ import Common from './common/common';
 import Service from './service/service';
 import Components from './components/components';
 import AppComponent from './app.component';
+import templateFooter from './footertable.html';
 import 'angular-i18n/pt-br';
 import 'angular-animate';
 import 'angular-sanitize';
@@ -28,7 +29,6 @@ import 'sweetalert2';
 import 'ui-select';
 import 'ng-idle';
 import 'lodash';
-
 
 angular.module('app', [
     uiRouter,
@@ -50,11 +50,18 @@ angular.module('app', [
     'toastr',
     'ngMessages',
   ])
-  .config(($locationProvider) => {
+  .run(($templateCache) => {
+    'ngInject';
+    $templateCache.put('footertable.html',templateFooter);
+  })
+  .config(($locationProvider, stConfig) => {
     'ngInject';
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     $locationProvider.html5Mode(true).hashPrefix('!');
+
+
+    stConfig.pagination.template = 'footertable.html';
   })
 
   .component('app', AppComponent);

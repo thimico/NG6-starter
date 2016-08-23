@@ -9,6 +9,7 @@ export default class BaseController {
     this.itemsPerPage = 5;
     this.infiniteScroll = {numToAdd:20, currentItems:20};
     this.hideNavbar = $stateParams ? $stateParams.hideNavbar : false;
+    this.setPagination();
   }
 
   clear() {
