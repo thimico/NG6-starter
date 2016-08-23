@@ -1,8 +1,10 @@
 import angular from 'angular';
-import Home from './home/home';
+import banco from './banco/banco';
+import home from './home/home';
 
 let componentModule = angular.module('app.components', [
-  Home,
+  banco,
+  home,
 ])
 .name;
 

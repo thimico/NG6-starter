@@ -1,12 +1,12 @@
 class HeroController {
   /*@ngInject*/
   constructor(bancoService) {
-    this.name = 'hero';
+    this.title = 'hero';
     this.value = 1;
-    this.lista = bancoService.obterTodos();
+    this.lista = bancoService.findAll();
   }
 
-  teste() {
+  teste2() {
     (this.submitted) = true;
     alert('teste');
   }

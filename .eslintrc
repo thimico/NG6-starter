@@ -12,7 +12,10 @@
   "rules": {
     // Default to single quotes and raise an error if something
     // else is used
-    "no-extra-parens":2,
-    "quotes": [2, "single"]
+    "no-extra-parens":["error", "all"],
+    "no-template-curly-in-string": "error",
+    "quotes": ["error", "single"],
+    "no-unsafe-negation": "error",
+    "no-multi-spaces": "error"
   }
 }

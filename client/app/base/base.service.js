@@ -2,34 +2,38 @@
 
 export default class BaseService {
   constructor(ApiFactory, params) {
-    this._api = ApiFactory;
+    this.api = ApiFactory;
     this.params = params
   }
 
-  criar(entity) {
-    return this._api.save(this.params, entity);
+  save(entity) {
+    return this.api.save(this.params, entity);
   }
 
-  atualizar(entity) {
-    return this._api.update(this.params, entity);
+  update(entity) {
+    return this.api.update(this.params, entity);
   }
 
-  obterUm(cod) {
-    let parametros = {cod};
-    _.merge(parametros, this.params);
-    return this._api.get(parametros);
+  findOne(cod) {
+    return this.api.get(this._createParams({cod}));
   }
 
-  obterTodos(filtro) {
-    if (filtro) {
-      return this._api.filter(this.params, filtro);
+  findAll(filter) {
+    if (filter) {
+      return this.api.filter(this.params, filter);
     }
-    return this._api.query(this.params);
+    return this.api.query(this.params);
   }
 
-  remover(cod) {
-    let parametros = {cod};
-    _.merge(parametros, this.params);
-    return this._api.delete(parametros);
+  findAllPaginated(pagination, filter) {
+    return this.api.filterPage(this._createParams(pagination), filter);
+  }
+
+  remove(cod) {
+    return this.api.delete(this._createParams({cod}));
+  }
+
+  _createParams(obj) {
+    return _.merge(obj, this.params);
   }
 }

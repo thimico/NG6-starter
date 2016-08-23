@@ -8,7 +8,7 @@ let component = {
   controller,
   restrict: 'E',
   controllerAs: 'vm',
-  bindings: {hideNavbar: '<'}
+  bindings: {}
 }
 
 let bancoModule = angular.module('banco', [
@@ -21,7 +21,7 @@ let bancoModule = angular.module('banco', [
 
   $stateProvider
     .state('banco', {
-      url: '/bancos',
+      url: '/bancos?hideNavbar',
       component: 'banco'
     });
 })

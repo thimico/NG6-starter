@@ -1,44 +1,52 @@
+/*global _:true*/
+/*global swal:true*/
+
 export default class BaseController {
-  constructor(entityService, modalService, SweetAlert, messageFactory, hideNavbar) {
+  constructor(entityService, $uibModal, $stateParams) {
     this.entityService = entityService;
-    this.SweetAlert = SweetAlert;
-    this.messageFactory = messageFactory;
     this.$uibModal = $uibModal;
-    this.itensPorPagina = 5;
+    this.itemsPerPage = 5;
     this.infiniteScroll = {numToAdd:20, currentItems:20};
-    this.hideNavbar({hideNavbar});
+    this.hideNavbar = $stateParams ? $stateParams.hideNavbar : false;
   }
 
-  resetInfScroll(isOpen) {
-    this.infiniteScroll.currentItems = this.infiniteScroll.numToAdd;
-  };
-
-  addMoreItems(){
-     this.infiniteScroll.currentItems += this.infiniteScroll.numToAdd;
-  };
-
   clear() {
-    this.filtro = {};
+    this.filter = {};
     this.search();
   }
 
   search() {
-    this.entityService.obterTodos(this.filtro).$promise.then(success => this.listaEntidade = success);
+    if (this.paginated) {
+      this.searchPaginated(this.pagination);
+    } else {
+      this.entityService.findAll(this.filter).$promise
+        .then(success => this.listaEntidade = success);
+    }
   }
 
-  save(params, config) {
+  searchPaginated(pagination) {
+    this.entityService.findAllPaginated(pagination, this.filter).$promise.then(success => {
+      if (this.pagination) {
+        this.tableState.pagination.totalItemCount = success.totalElements;
+        this.tableState.pagination.numberOfPages = success.totalPages;
+      }
+      this.page = success;
+    });
+  }
+
+  new(params, config) {
     this.openModal(null, `Cadastrar ${this.entityName}`, this.formComponent, params, config)
-      .then((success) => {
+      .then(() => {
         this.messageFactory.addSuccess('Registro cadastrado com sucesso!', true);
         this.search();
       });
   }
 
   edit(id, params, config) {
-    this.entityService.obterUm(id).$promise.then( success =>  {
+    this.entityService.obterUm(id).$promise.then( success => {
       let entidade = success;
       this.openModal(entidade, `Editar ${this.entityName}`, this.formComponent, params, config)
-        .then((success) => {
+        .then(() => {
           this.messageFactory.addSuccess('Registro atualizado com sucesso!', true);
           this.search();
         });
@@ -46,38 +54,57 @@ export default class BaseController {
   }
 
   view(id, params, config) {
-    this.entityService.obterUm(id).$promise.then( success =>  {
+    this.entityService.obterUm(id).$promise.then( success => {
       let entidade = success;
       this.openModal(entidade, `Visualizar ${this.entityName}`, this.viewComponent, params, config)
-        .then((success) => this.search());
+        .then(() => this.search());
     });
   }
 
   remove(id) {
-    this.SweetAlert.swal({
+    swal({
       title: `Remover ${this.entityName}`,
-      text: "Tem certeza que deseja remover o Registro?",
-      type: "warning",
+      text: 'Tem certeza que deseja remover o Registro?',
+      type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Sim, remover!",
-      cancelButtonText: "Não, cancelar!",
-      closeOnConfirm: false,
-      closeOnCancel: true },
-      (isConfirm) => {
-        if (isConfirm) {
-          this.entityService.remover(id).$promise.
-          then(
-            success => {
-              this.SweetAlert.swal("Removido!", "O Registro foi removido com sucesso.", "success");
-              this.search();
-            },
-            error => {
-              this.SweetAlert.swal("Erro!", "Não foi possível excluir esse Registro.\n Ele já está associado a outra entidade.", "error");
-              this.search();
-            });
-        }
-      });
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Sim, remover!',
+      cancelButtonText: 'Não, cancelar!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger'
+    }).then(() => {
+      this.entityService.remover(id).$promise.then(
+        () => {
+          this.SweetAlert.swal('Removido!', 'O Registro foi removido com sucesso.', 'success');
+          this.search();
+        },
+        () => {
+          this.SweetAlert.swal('Erro!', 'Não foi possível excluir esse Registro.\n Ele já está associado a outra entidade.', 'error');
+          this.search();
+        });
+    });
+  }
+
+  setPagination() {
+    if (this.tableState) {
+      this.pagination = {
+        page: this.tableState.pagination.start / this.tableState.pagination.number,
+        size: this.tableState.pagination.number,
+        direction: this.tableState.sort.reverse === false ? 'ASC' : 'DESC',
+        sortBy: this.tableState.sort.predicate || ''
+      };
+    }
+  }
+
+  onPipe(tableState) {
+    let vm = this.$parent.vm;
+    if (!vm.tableState) {
+      vm.tableState = tableState;
+    }
+
+    vm.setPagination();
+
+    vm.search();
   }
 
   openModal(entity, title, component, params, config) {
@@ -99,5 +126,13 @@ export default class BaseController {
     _.merge(config, modalDefaults)
 
     return this.$uibModal.open(config).result;
+  }
+
+  resetInfScroll() {
+    this.infiniteScroll.currentItems = this.infiniteScroll.numToAdd;
+  }
+
+  addMoreItems(){
+     this.infiniteScroll.currentItems += this.infiniteScroll.numToAdd;
   }
 }

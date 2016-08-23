@@ -29,10 +29,10 @@ export default function($resource, $location) {
     'download': {
       method: 'GET',
       transformResponse: function(data, headers){
-          let response = {}
-          response.data = data;
-          response.headers = headers();
-          return response;
+        let response = {};
+        response.data = data;
+        response.headers = headers();
+        return response;
       },
       responseType: 'arraybuffer',
     }
