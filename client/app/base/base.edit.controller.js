@@ -1,20 +1,20 @@
 export default class BaseEditController {
-  constructor(entityService, ModalParams, $scope, messageFactory) {
+  constructor(entityService, $scope, messageFactory) {
     this.entityService = entityService;
     this.messageFactory = messageFactory;
-    this.title = ModalParams.title;
-    this.params = ModalParams.params;
+    this.title = this.resolve.modalParams.title;
+    this.params = this.resolve.modalParams.params;
     this.$scope = $scope;
     this.infiniteScroll = {};
     this.infiniteScroll.numToAdd = 20;
     this.infiniteScroll.currentItems = 20;
 
-    if (!ModalParams.entity) {
+    if (!this.resolve.modalParams.entity) {
       this.isEdicao = false;
       this.entity = {};
     } else {
       this.isEdicao = true;
-      this.entity = ModalParams.entity;
+      this.entity = this.resolve.modalParams.entity;
     }
   }
 

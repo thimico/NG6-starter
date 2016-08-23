@@ -2,7 +2,7 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-resource';
 import 'angular-animate';
-import services from '../../../services/services';
+import services from '../../../service/service';
 import common from '../../../common/common';
 import controller from './banco.edit.modal.controller';
 import template from './banco.edit.modal.html'
@@ -12,7 +12,7 @@ let component = {
   controller,
   restrict: 'E',
   controllerAs: 'vm',
-  bindings: {}
+  bindings: {resolve: '<'}
 }
 
 let module = angular.module('banco.edit.modal', [
@@ -22,7 +22,7 @@ let module = angular.module('banco.edit.modal', [
   services,
   common,
 ])
-.component('BancoEditModal', component)
+.component('bancoEditModal', component)
 .name;
 
 export default module;

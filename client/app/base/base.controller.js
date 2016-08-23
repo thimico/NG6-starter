@@ -120,7 +120,7 @@ export default class BaseController {
       modalFade: true,
       size: 'lg',
       resolve: {
-        ModalParams: () => {entity,title,params}
+        modalParams: {entity,title,params} 
       }
     }
 
