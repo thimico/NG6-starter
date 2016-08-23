@@ -15,7 +15,7 @@ let bancoModule = angular.module('banco', [
   uiRouter
 ])
 .config(($stateProvider, $urlRouterProvider) => {
-  "ngInject";
+  'ngInject';
 
   $urlRouterProvider.otherwise('/');
 

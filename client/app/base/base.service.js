@@ -1,3 +1,5 @@
+/*global _:true*/
+
 export default class BaseService {
   constructor(ApiFactory, params) {
     this._api = ApiFactory;

@@ -7,23 +7,13 @@ class HeroController {
   }
 
   teste() {
-    this.submitted = true;
+    (this.submitted) = true;
     alert('teste');
   }
 
-  mensagem(elemento, touched) {
-    console.log(this.value);
+  mensagem(elemento) {
     this.value++;
     return elemento;
-
-    if (!touched)
-      return '';
-
-    if (!this.submitted)
-      return '';
-
-    if (elemento.required)
-      return 'Campo obrigatório';
   }
 }
 

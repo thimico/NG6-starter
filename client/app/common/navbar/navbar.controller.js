@@ -1,6 +1,6 @@
 class NavbarController {
   /*@ngInject*/
-  constructor($state, $window, $stateParams){
+  constructor($state, $window){
     this.name = 'navbar';
     this.$state = $state;
     this.$window = $window;
@@ -16,7 +16,7 @@ class NavbarController {
   }
 
   newPage(state) {
-    this.$window.open(this.$state.href(state, {hideNavbar: true}), '_blank', "height=700,width=900,menubar=false, toolbar=false");
+    this.$window.open(this.$state.href(state, {hideNavbar: true}), '_blank', 'height=700,width=900,menubar=false, toolbar=false');
   }
 }
 

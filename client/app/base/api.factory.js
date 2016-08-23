@@ -1,5 +1,5 @@
 export default function($resource, $location) {
-  "ngInject";
+  'ngInject';
   return $resource(`${$location.protocol()}://${$location.host()}:8080/stcaspweb/api/:root/:resource/:action/:cod`, {}, {
     'update': {
       method: 'PUT'
@@ -7,34 +7,34 @@ export default function($resource, $location) {
     'edit': {
       method: 'PATCH'
     },
-    "getPage": {
-      method: "GET",
+    'getPage': {
+      method: 'GET',
       params: {
-        action: "filtrar"
+        action: 'filtrar'
       }
     },
-    "filterPage": {
-      method: "POST",
+    'filterPage': {
+      method: 'POST',
       params: {
-        action: "filtrar"
+        action: 'filtrar'
       }
     },
-    "filter": {
-      method: "POST",
+    'filter': {
+      method: 'POST',
       isArray: true,
       params: {
-        action: "filtrar"
+        action: 'filtrar'
       }
     },
-    "download": {
-      method: "GET",
+    'download': {
+      method: 'GET',
       transformResponse: function(data, headers){
           let response = {}
           response.data = data;
           response.headers = headers();
           return response;
       },
-      responseType: "arraybuffer",
+      responseType: 'arraybuffer',
     }
   });
-};
+}
