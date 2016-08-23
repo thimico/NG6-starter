@@ -2,6 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import template from './banco.html';
 import controller from './banco.controller';
+import bancoEditModal from './banco.edit.modal/banco.edit.modal';
 
 let component = {
   template,
@@ -12,7 +13,8 @@ let component = {
 }
 
 let bancoModule = angular.module('banco', [
-  uiRouter
+  uiRouter,
+  bancoEditModal,
 ])
 .config(($stateProvider, $urlRouterProvider) => {
   'ngInject';

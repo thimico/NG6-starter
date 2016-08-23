@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <h3>{{vm.title}}</h3>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <form role="form" name="form" novalidate>
+
+      <!-- Linha 1 -->
+
+      <div class="row">
+        <div class="col-md-1"
+          ng-class="{'has-error' : (form.codigo.$touched && form.codigo.$invalid)}">
+          <label for="codigo" class="required-label">Código</label>
+          <input type="text" id="codigo" name="codigo" 
+            required ng-required="true" maxlength="3" ng-maxlength="3" 
+            class="form-control input-sm" ng-model="vm.entity.codigo" >
+        </div>
+        
+        <div class="col-md-7"
+          ng-class="{ 'has-error' : (form.nome.$touched && form.nome.$invalid) }">
+          <label for="nome" class="required-label">Nome do banco</label>
+          <input type="text" id="nome" name="nome" required ng-required="true"
+            maxlength="100" ng-maxlength="100" placeholder="Nome do banco" 
+            class="form-control input-sm" ng-model="vm.entity.nome">
+          <p ng-if="form.nome.$touched && form.nome.$invalid"
+            class="help-block">O Nome do banco é obrigatório.</p>
+        </div>
+      </div>
+
+      <!-- Linha 2 -->
+
+      <div class="row">
+        <div class="col-md-6"
+          ng-class="{'has-error': (form.nomeReduzido.$touched && form.nomeReduzido.$invalid)}">
+          <label for="nomeReduzido" class="required-label">Nome reduzido</label>
+          <input type="text" id="nomeReduzido" name="nomeReduzido" required ng-required="true"
+            maxlength="30" ng-maxlength="30" placeholder="Nome reduzido" 
+            class="form-control input-sm" ng-model="vm.entity.nomeReduzido">
+          <p ng-if="form.nomeReduzido.$touched && form.nomeReduzido.$invalid"
+            class="help-block">O Nome reduzido do banco é obrigatório.</p>
+        </div>
+
+        <div class="col-md-3">
+          <label for="modeloCheque">Modelo de cheque</label>
+          <input type="text" id="modeloCheque" name="modeloCheque"
+            maxlength="2" ng-maxlength="2" 
+            class="form-control input-sm" ng-model="vm.entity.modeloCheque">        
+        </div>        
+      </div>
+    </form>
+  </div>
+  <message></message>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" ng-show="!vm.isEdicao" ng-disabled="form.$invalid" 
+    ng-click="vm.criar(vm.entity)">
+    <span class="glyphicon glyphicon-ok-sign"></span> Cadastrar
+  </button>
+  <button type="button" class="btn btn-success" ng-show="vm.isEdicao" ng-disabled="form.$invalid" 
+    ng-click="vm.atualizar(vm.entity)">
+      <span class="glyphicon glyphicon-ok-sign"></span> Atualizar
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="$dismiss()">
+    <span class="glyphicon glyphicon-remove-sign"></span> Fechar
+  </button>
+</div>
