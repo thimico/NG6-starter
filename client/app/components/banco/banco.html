@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-md-2">
-          <button class="btn btn-default btn-block" ng-click="vm.clear()">
+          <button class="btn btn-default btn-block" ng-click="vm.teste()">
             <span class="glyphicon glyphicon-erase"> </span> Limpar
           </button>
         </div>
@@ -49,9 +49,6 @@
         <tr>
           <th class="col-md-1" st-sort="codigo">Codigo</th>
           <th class="col-md-2" st-sort-default="true" st-sort="nome">Nome</th>
-          <th class="sm-display-none col-md-1" st-sort="tipoPessoa">Tipo Pessoa</th>
-          <th class="sm-display-none col-md-1" >Documento</th>
-          <th class="sm-display-none col-md-1" st-sort="situacaoCadastro">Situação</th>
           <th class="col-md-1">Ação</th>
         </tr>
       </thead>
@@ -64,9 +61,6 @@
         <tr ng-repeat="item in vm.page.content" ng-if="vm.page.content.length">
           <td class="col-md-1">{{item.codigo}}</td>
           <td class="col-md-2">{{item.nome}}</td>
-          <td class="sm-display-none col-md-1">{{vm.tipoPessoa[item.tipoPessoa].label}}</td>
-          <td class="sm-display-none col-md-1">{{vm.documentoPessoa(item)}}</td>
-          <td class="sm-display-none col-md-1">{{vm.Situacao[item.situacaoCadastro].label}}</td>
           <td class="col-md-1">
             <div class="action-buttons">
               <button class="btn btn-warning btn-sm glyphicon glyphicon-pencil" ng-click="vm.edit(item.id)"

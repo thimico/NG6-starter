@@ -16,7 +16,7 @@ export default function($resource, $location) {
     'filterPage': {
       method: 'POST',
       params: {
-        action: 'filtrar'
+        action: 'paginated'
       }
     },
     'filter': {

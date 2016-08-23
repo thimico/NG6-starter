@@ -1,0 +1,5 @@
+<div class="container-fluid message-container">
+  <uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="20000"
+    class="message-animation" type="{{alert.type}}" close="alert.close()">
+    <strong>{{alert.message}}</strong></uib-alert>
+</div>

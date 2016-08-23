@@ -2,9 +2,10 @@
 /*global swal:true*/
 
 export default class BaseController {
-  constructor(entityService, $uibModal, $stateParams) {
+  constructor(entityService, $uibModal, messageFactory, $stateParams) {
     this.entityService = entityService;
     this.$uibModal = $uibModal;
+    this.messageFactory = messageFactory;
     this.itemsPerPage = 5;
     this.infiniteScroll = {numToAdd:20, currentItems:20};
     this.hideNavbar = $stateParams ? $stateParams.hideNavbar : false;
