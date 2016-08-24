@@ -32,6 +32,7 @@ export default class BaseController {
         this.tableState.pagination.numberOfPages = success.totalPages;
       }
       this.page = success;
+      this.listaEntidade = success.content;
     });
   }
 
@@ -44,7 +45,7 @@ export default class BaseController {
   }
 
   edit(id, params, config) {
-    this.entityService.obterUm(id).$promise.then( success => {
+    this.entityService.findOne(id).$promise.then( success => {
       let entidade = success;
       this.openModal(entidade, `Editar ${this.entityName}`, this.formComponent, params, config)
         .then(() => {
@@ -55,7 +56,7 @@ export default class BaseController {
   }
 
   view(id, params, config) {
-    this.entityService.obterUm(id).$promise.then( success => {
+    this.entityService.findOne(id).$promise.then( success => {
       let entidade = success;
       this.openModal(entidade, `Visualizar ${this.entityName}`, this.viewComponent, params, config)
         .then(() => this.search());
@@ -74,13 +75,13 @@ export default class BaseController {
       confirmButtonClass: 'btn btn-success',
       cancelButtonClass: 'btn btn-danger'
     }).then(() => {
-      this.entityService.remover(id).$promise.then(
+      this.entityService.remove(id).$promise.then(
         () => {
-          this.SweetAlert.swal('Removido!', 'O Registro foi removido com sucesso.', 'success');
+          swal('Removido!', 'O Registro foi removido com sucesso.', 'success');
           this.search();
         },
         () => {
-          this.SweetAlert.swal('Erro!', 'Não foi possível excluir esse Registro.\n Ele já está associado a outra entidade.', 'error');
+          swal('Erro!', 'Não foi possível excluir esse Registro.\n Ele já está associado a outra entidade.', 'error');
           this.search();
         });
     });
@@ -115,12 +116,12 @@ export default class BaseController {
 
     let modalDefaults = {
       component,
-      backdrop: true,
+      backdrop: 'static',
       keyboard: true,
       modalFade: true,
       size: 'lg',
       resolve: {
-        modalParams: {entity,title,params} 
+        modalParams: {entity,title,params}
       }
     }
 

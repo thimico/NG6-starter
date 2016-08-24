@@ -53,11 +53,11 @@ gulp.task('webpack', ['clean'], (cb) => {
   config.entry.app = paths.entry;
 
   webpack(config, (err, stats) => {
-    if(err)  {
-      throw new gutil.PluginError("webpack", err);
+    if(err) {
+      throw new gutil.PluginError('webpack', err);
     }
 
-    gutil.log("[webpack]", stats.toString({
+    gutil.log('[webpack]', stats.toString({
       colors: colorsSupported,
       chunks: false,
       errorDetails: true
@@ -108,24 +108,28 @@ gulp.task('component', () => {
   const cap = (val) => {
     return val.charAt(0).toUpperCase() + val.slice(1);
   };
+  const dot = (val) => {
+    return val.replace(/([a-zA-Z])(?=[A-Z])/g, '$1.').toLowerCase();
+  };
   const name = yargs.argv.name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToComponents(), parentPath, name);
+  const destPath = path.join(resolveToComponents(), parentPath, dot(name));
 
   return gulp.src(paths.blankTemplates)
     .pipe(template({
       name: name,
+      dotName: dot(name),
       upCaseName: cap(name)
     }))
     .pipe(rename((path) => {
-      path.basename = path.basename.replace('temp', name);
+      path.basename = path.basename.replace('temp', dot(name));
     }))
     .pipe(gulp.dest(destPath));
 });
 
 gulp.task('clean', (cb) => {
   del([paths.dest]).then(function (paths) {
-    gutil.log("[clean]", paths);
+    gutil.log('[clean]', paths);
     cb();
   })
 });

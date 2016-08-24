@@ -22,7 +22,7 @@
 
         <div class="col-md-10"
           ng-class="{ 'has-error' : ((form.nome.$touched || vm.submitted) && form.nome.$invalid) }">
-          <label for="nome" class="required-label">Nome do banco</label>
+          <label for="nome" class="required-label">Nome</label>
           <input type="text" id="nome" name="nome" required ng-required="true"
             maxlength="100" ng-maxlength="100" placeholder="Nome do banco"
             class="form-control input-sm" ng-model="vm.entity.nome">
@@ -30,30 +30,6 @@
             ng-messages="form.nome.$error" class="error-text" role="alert">
             <div ng-message="required">Campo Obrigatório</div>
           </div>
-        </div>
-      </div>
-
-      <!-- Linha 2 -->
-
-      <div class="row">
-        <div class="col-md-6 container-fluid"
-          ng-class="{'has-error': ((form.nomeReduzido.$touched || vm.submitted) && form.nomeReduzido.$invalid)}">
-          <label for="nomeReduzido" class="required-label">Nome reduzido</label>
-          <input type="text" id="nomeReduzido" name="nomeReduzido" required ng-required="true"
-            maxlength="30" ng-maxlength="30" placeholder="Nome reduzido"
-            class="form-control input-sm" ng-model="vm.entity.nomeReduzido">
-
-          <div ng-if="(form.nomeReduzido.$touched || vm.submitted) && form.nomeReduzido.$invalid"
-            ng-messages="form.nomeReduzido.$error" class="error-text" role="alert">
-            <div ng-message="required">Campo Obrigatório</div>
-          </div>
-        </div>
-
-        <div class="col-md-3 container-fluid">
-          <label for="modeloCheque">Modelo de cheque</label>
-          <input type="text" id="modeloCheque" name="modeloCheque"
-            maxlength="2" ng-maxlength="2"
-            class="form-control input-sm" ng-model="vm.entity.modeloCheque">
         </div>
       </div>
     </div>

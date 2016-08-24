@@ -1,19 +1,18 @@
 export default class BaseEditController {
-  constructor(entityService, $scope, messageFactory) {
+  constructor(entityService, messageFactory) {
     this.entityService = entityService;
     this.messageFactory = messageFactory;
     this.title = this.resolve.modalParams.title;
     this.params = this.resolve.modalParams.params;
-    this.$scope = $scope;
     this.infiniteScroll = {};
     this.infiniteScroll.numToAdd = 20;
     this.infiniteScroll.currentItems = 20;
 
     if (!this.resolve.modalParams.entity) {
-      this.isEdicao = false;
+      this.isEdit = false;
       this.entity = {};
     } else {
-      this.isEdicao = true;
+      this.isEdit = true;
       this.entity = this.resolve.modalParams.entity;
     }
   }
@@ -26,31 +25,54 @@ export default class BaseEditController {
      this.infiniteScroll.currentItems += this.infiniteScroll.numToAdd;
   }
 
-  criarContinuar(entity) {
-    this.entityService.criar(entity).$promise
+  saveAndContinue(entity, isInvalid) {
+    if (isInvalid) {
+      this.submitted = true;
+      return;
+    }
+    this.entityService.save(entity).$promise
       .then(() => {
         this.messageFactory.addSuccess('Registro cadastrado com sucesso!', true);
-        this.resetarEntidade();
+        this.resetEntity();
       }
     );
   }
 
-  resetarEntidade() {
+  resetEntity() {
+    this.submitted = false;
     this.entity = {};
   }
 
-  criar(entity) {
-    this.entityService.criar(entity).$promise
+  tooltipThis(errors) {
+    if (!errors) {
+      return '';
+    }
+
+    if (errors.required) {
+      return 'Campo Obrigatório';
+    }
+  }
+
+  save(entity, isInvalid) {
+    if (isInvalid) {
+      this.submitted = true;
+      return;
+    }
+    this.entityService.save(entity).$promise
       .then(success => {
-        this.$scope.$close(success);
+        this.close(success);
       }
     );
   }
 
-  atualizar(entity) {
-    this.entityService.atualizar(entity).$promise
+  update(entity, isInvalid) {
+    if (isInvalid) {
+      this.submitted = true;
+      return;
+    }
+    this.entityService.update(entity).$promise
       .then(success => {
-        this.$scope.$close(success);
+        this.close(success);
       }
     );
   }

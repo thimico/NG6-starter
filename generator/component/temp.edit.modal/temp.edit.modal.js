@@ -4,8 +4,8 @@ import 'angular-resource';
 import 'angular-animate';
 import services from '../../../service/service';
 import common from '../../../common/common';
-import controller from './banco.edit.modal.controller';
-import template from './banco.edit.modal.html'
+import controller from './<%= dotName %>.edit.modal.controller';
+import template from './<%= dotName %>.edit.modal.html'
 
 let component = {
   template,
@@ -19,14 +19,14 @@ let component = {
   }
 }
 
-let module = angular.module('banco.edit.modal', [
+let module = angular.module('<%= dotName %>.edit.modal', [
   'ui.router',
   'ngResource',
   'ngAnimate',
   services,
   common,
 ])
-.component('bancoEditModal', component)
+.component('<%= name %>EditModal', component)
 .name;
 
 export default module;

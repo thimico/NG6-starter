@@ -1,3 +1,43 @@
-<div>
-  <h1>{{ $ctrl.name }}</h1>
+<div class="modal-header">
+  <h3>{{vm.title}}</h3>
 </div>
+<form role="form" name="form" novalidate>
+  <div class="modal-body">
+    <div class="container">
+
+      <!-- Linha 1 -->
+
+      <div class="row">
+        <div class="col-md-2"
+          ng-class="{'has-error' : ((form.codigo.$touched || vm.submitted) && form.codigo.$invalid)}">
+          <label for="codigo" class="required-label">Código</label>
+          <input type="text" id="codigo" name="codigo" autofocus
+            required ng-required="true" maxlength="3" ng-maxlength="3"
+            class="form-control input-sm" ng-model="vm.entity.codigo" >
+        </div>
+
+        <div class="col-md-7"
+          ng-class="{ 'has-error' : ((form.nome.$touched || vm.submitted) && form.nome.$invalid) }">
+          <label for="nome" class="required-label">Nome do banco</label>
+          <input type="text" id="nome" name="nome" required ng-required="true"
+            maxlength="100" ng-maxlength="100" placeholder="Nome do banco"
+            class="form-control input-sm" ng-model="vm.entity.nome">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-success" ng-if="!vm.isEdit"
+      ng-click="vm.save(vm.entity, form.$invalid)">
+      <span class="glyphicon glyphicon-ok-sign"></span> Cadastrar
+    </button>
+    <button class="btn btn-success" ng-if="vm.isEdit"
+      ng-click="vm.update(vm.entity, form.$invalid)">
+        <span class="glyphicon glyphicon-ok-sign"></span> Atualizar
+    </button>
+    <button class="btn btn-primary" ng-click="vm.dismiss()">
+      <span class="glyphicon glyphicon-remove-sign"></span> Fechar
+    </button>
+  </div>
+</form>
